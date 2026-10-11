@@ -92,26 +92,29 @@ body {
   line-height: 1.7;
 }
 
-/* ===== ENCABEZADO PRINCIPAL ===== */
+/* ===== FORZAR ENCABEZADO PRINCIPAL ===== */
 #title-block-header {
-  background-color: #17365D;
-  color: #FFFFFF;
-  padding: 35px 30px;
-  border-radius: 0 0 8px 8px;
-  margin-bottom: 25px;
+  background-color: #17365D !important;
+  color: #FFFFFF !important;
+  padding: 35px 30px !important;
+  border-radius: 0 0 8px 8px !important;
+  margin-bottom: 25px !important;
 }
 
-#title-block-header .quarto-title h1,
-#title-block-header .subtitle {
-  color: #FFFFFF !important;
-}
-
-/* Metadatos visibles y sin recuadros internos */
-#title-block-header .quarto-title-meta,
-#title-block-header .quarto-title-meta-heading,
-#title-block-header .quarto-title-meta-contents {
-  color: #FFFFFF !important;
+/* Forzar que cualquier contenedor interno sea transparente y no blanco */
+#title-block-header .quarto-title-block,
+#title-block-header .quarto-title,
+#title-block-header div {
   background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Forzar color blanco en el título y subtítulo */
+#title-block-header h1, 
+#title-block-header .title, 
+#title-block-header .subtitle,
+#title-block-header .quarto-title h1 {
+  color: #FFFFFF !important;
 }
 
 /* ===== TÍTULOS Y TEXTO ===== */
@@ -207,12 +210,6 @@ table tbody tr:nth-child(even) {
     grid-template-columns: 1fr;
   }
 }
-kableExtra::kable_styling(
-  bootstrap_options = c("striped", "hover", "condensed"),
-  full_width = FALSE,
-  position = "center",
-  font_size = 14
-)
 
 /* ===== TEXTO GENERAL ===== */
 body {
@@ -451,6 +448,35 @@ caption {
   font-weight: 700;
   text-align: center;
   padding: 12px;
+}
+/* ===== SOLUCIÓN DEFINITIVA PARA EL BANNER ===== */
+
+/* 1. Ocultamos el contenedor automático con fallos de Quarto si es necesario, 
+   o le forzamos el color azul de fondo y texto blanco por completo */
+#title-block-header {
+  background-color: #17365D !important;
+  background: #17365D !important;
+  color: #FFFFFF !important;
+  padding: 40px 30px !important;
+  border-radius: 0 0 8px 8px !important;
+  margin-bottom: 25px !important;
+}
+
+/* 2. Forzamos que cualquier caja interna en blanco se vuelva transparente */
+#title-block-header .quarto-title-block,
+#title-block-header .quarto-title,
+#title-block-header .quarto-title-meta,
+#title-block-header div {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 3. Aseguramos que el título y subtítulo sean blancos y visibles */
+#title-block-header h1.title,
+#title-block-header .quarto-title h1,
+#title-block-header .subtitle {
+  color: #FFFFFF !important;
+  background: transparent !important;
 }
 
 </style>
@@ -700,6 +726,9 @@ genero_counts <- educación %>%
 
 # Crear el diagrama circular
 ggplot(genero_counts, aes(x = "", y = porcentaje, fill = Genero)) +
+  scale_fill_manual(
+  values = paleta_categorias
+) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y") +
   labs(title = "Distribución porcentual del genero de los encuestados") +

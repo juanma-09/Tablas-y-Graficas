@@ -246,26 +246,29 @@ body {
   line-height: 1.7;
 }
 
-/* ===== ENCABEZADO PRINCIPAL ===== */
+/* ===== FORZAR ENCABEZADO PRINCIPAL ===== */
 #title-block-header {
-  background-color: #17365D;
-  color: #FFFFFF;
-  padding: 35px 30px;
-  border-radius: 0 0 8px 8px;
-  margin-bottom: 25px;
+  background-color: #17365D !important;
+  color: #FFFFFF !important;
+  padding: 35px 30px !important;
+  border-radius: 0 0 8px 8px !important;
+  margin-bottom: 25px !important;
 }
 
-#title-block-header .quarto-title h1,
-#title-block-header .subtitle {
-  color: #FFFFFF !important;
-}
-
-/* Metadatos visibles y sin recuadros internos */
-#title-block-header .quarto-title-meta,
-#title-block-header .quarto-title-meta-heading,
-#title-block-header .quarto-title-meta-contents {
-  color: #FFFFFF !important;
+/* Forzar que cualquier contenedor interno sea transparente y no blanco */
+#title-block-header .quarto-title-block,
+#title-block-header .quarto-title,
+#title-block-header div {
   background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Forzar color blanco en el título y subtítulo */
+#title-block-header h1, 
+#title-block-header .title, 
+#title-block-header .subtitle,
+#title-block-header .quarto-title h1 {
+  color: #FFFFFF !important;
 }
 
 /* ===== TÍTULOS Y TEXTO ===== */
@@ -361,12 +364,6 @@ table tbody tr:nth-child(even) {
     grid-template-columns: 1fr;
   }
 }
-kableExtra::kable_styling(
-  bootstrap_options = c("striped", "hover", "condensed"),
-  full_width = FALSE,
-  position = "center",
-  font_size = 14
-)
 
 /* ===== TEXTO GENERAL ===== */
 body {
@@ -605,6 +602,35 @@ caption {
   font-weight: 700;
   text-align: center;
   padding: 12px;
+}
+/* ===== SOLUCIÓN DEFINITIVA PARA EL BANNER ===== */
+
+/* 1. Ocultamos el contenedor automático con fallos de Quarto si es necesario, 
+   o le forzamos el color azul de fondo y texto blanco por completo */
+#title-block-header {
+  background-color: #17365D !important;
+  background: #17365D !important;
+  color: #FFFFFF !important;
+  padding: 40px 30px !important;
+  border-radius: 0 0 8px 8px !important;
+  margin-bottom: 25px !important;
+}
+
+/* 2. Forzamos que cualquier caja interna en blanco se vuelva transparente */
+#title-block-header .quarto-title-block,
+#title-block-header .quarto-title,
+#title-block-header .quarto-title-meta,
+#title-block-header div {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 3. Aseguramos que el título y subtítulo sean blancos y visibles */
+#title-block-header h1.title,
+#title-block-header .quarto-title h1,
+#title-block-header .subtitle {
+  color: #FFFFFF !important;
+  background: transparent !important;
 }
 
 </style>
@@ -964,18 +990,21 @@ Nota
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el diagrama circular</span></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(genero_counts, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> porcentaje, <span class="at">fill =</span> Genero)) <span class="sc">+</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución porcentual del genero de los encuestados"</span>) <span class="sc">+</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, porcentaje)), </span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), </span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"white"</span>, </span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> paleta_categorias</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución porcentual del genero de los encuestados"</span>) <span class="sc">+</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, porcentaje)), </span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), </span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"white"</span>, </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
