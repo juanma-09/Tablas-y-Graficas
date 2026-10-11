@@ -1,25 +1,22 @@
 ---
 title: "DISTRIBUCIONES DE FRECUENCIAS"
 subtitle: "Tablas y Graficas"
-author: 
-  - name: Juan Manuel Rangel Rodríguez
-    affiliation: "Universidad del Tolima"
-    affiliation-url: "https://www.ut.edu.co/"
-date: today
+author: ""
+date: ""
 lang: es
-title-block-banner: "#005F9D"
+title-block-banner: "#17365D"
 
 format:
   html:
     page-layout: full
-    fontsize: 14pt
+    fontsize: 12pt
     toc: true
     toc-location: right
     number-sections: true
     code-fold: true
     code-summary: "Ver código"
-    theme: dark
-    highlight-style: monokai
+    theme: cosmo
+    highlight-style: github
     html-math-method: katex
     smooth-scroll: true
     link-external-newwindow: true
@@ -38,6 +35,23 @@ knitr:
     out.width: "70%"
 bibliography: references.bib
 ---
+
+```{=html}
+<div class="datos-documento">
+  <div>
+    <span class="etiqueta">AUTOR/A</span>
+    <strong>Juan Manuel Rangel Rodríguez</strong>
+  </div>
+  <div>
+    <span class="etiqueta">AFILIACIÓN</span>
+    <a href="https://www.ut.edu.co/">Universidad del Tolima</a>
+  </div>
+  <div>
+    <span class="etiqueta">FECHA DE PUBLICACIÓN</span>
+    <strong>11 de octubre de 2026</strong>
+  </div>
+</div>
+```
 
 ```{r setup}
 options(
@@ -69,11 +83,376 @@ options(
 
 ```{=html}
 <style>
-body{
-  background-color:#FFF0F0;
-  font-size:130%;
-  text-align:justify;
+/* ===== DISEÑO GENERAL ===== */
+body {
+  background: #FFFFFF;
+  color: #303846;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
 }
+
+/* ===== ENCABEZADO PRINCIPAL ===== */
+#title-block-header {
+  background-color: #17365D;
+  color: #FFFFFF;
+  padding: 35px 30px;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 25px;
+}
+
+#title-block-header .quarto-title h1,
+#title-block-header .subtitle {
+  color: #FFFFFF !important;
+}
+
+/* Metadatos visibles y sin recuadros internos */
+#title-block-header .quarto-title-meta,
+#title-block-header .quarto-title-meta-heading,
+#title-block-header .quarto-title-meta-contents {
+  color: #FFFFFF !important;
+  background: transparent !important;
+}
+
+/* ===== TÍTULOS Y TEXTO ===== */
+h1, h2, h3, h4 {
+  color: #17365D;
+  font-weight: 600;
+}
+
+h1 {
+  border-bottom: 2px solid #D8E2EF;
+  padding-bottom: 8px;
+}
+
+h2 {
+  border-bottom: 1px solid #E5EAF1;
+  padding-bottom: 5px;
+}
+
+p {
+  text-align: left;
+}
+
+/* ===== TABLAS ===== */
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table thead th {
+  background-color: #17365D !important;
+  color: #FFFFFF !important;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #F1F5F9;
+}
+
+/* ===== BIBLIOGRAFÍA ===== */
+#refs, .references, .csl-bib-body {
+  color: #303846;
+  text-align: left;
+}
+
+#refs a, .references a, .csl-bib-body a {
+  color: #2F5597;
+}
+
+/* ===== GRÁFICAS ===== */
+.cell-output-display {
+  text-align: center;
+}
+
+.cell-output-display img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Información del documento debajo del encabezado */
+.datos-documento {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  padding: 25px 30px;
+  margin: 0 0 30px 0;
+  background: #F1F5F9;
+  border-bottom: 2px solid #D8E2EF;
+  border-radius: 0 0 8px 8px;
+  color: #303846;
+}
+
+.datos-documento > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.datos-documento .etiqueta {
+  color: #64748B;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.datos-documento strong,
+.datos-documento a {
+  color: #17365D;
+  font-size: 15px;
+}
+
+@media (max-width: 700px) {
+  .datos-documento {
+    grid-template-columns: 1fr;
+  }
+}
+kableExtra::kable_styling(
+  bootstrap_options = c("striped", "hover", "condensed"),
+  full_width = FALSE,
+  position = "center",
+  font_size = 14
+)
+
+/* ===== TEXTO GENERAL ===== */
+body {
+  background-color: #FFFFFF;
+  color: #303846;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===== TITULOS PRINCIPALES: # ===== */
+h1 {
+  color: #17365D;
+  background-color: #FFFFFF;
+  font-size: 1.9rem;
+  font-weight: 750;
+  border-bottom: 4px solid #2F5597;
+  padding: 10px 0 12px 0;
+  margin-top: 1.8em;
+  margin-bottom: 1em;
+}
+
+/* ===== TITULOS SECUNDARIOS: ## ===== */
+h2 {
+  color: #17365D;
+  background-color: #EAF0F7;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-left: 6px solid #8FAADC;
+  border-bottom: 1px solid #D5DDE7;
+  border-radius: 5px;
+  padding: 12px 16px;
+  margin-top: 1.5em;
+  margin-bottom: 0.9em;
+}
+
+
+/* ===== TITULOS DE TERCER NIVEL: ### ===== */
+h3 {
+  color: #17365D;
+  background-color: #EAF0F7;
+  font-size: 1.18rem;
+  font-weight: 700;
+  border-left: 5px solid #2F5597;
+  border-radius: 4px;
+  padding: 9px 13px;
+  margin-top: 1.3em;
+  margin-bottom: 0.7em;
+}
+
+/* ===== TITULOS DE CUARTO NIVEL: #### ===== */
+h4 {
+  color: #2F5597;
+  background-color: #F1F5F9;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-left: 4px solid #8FAADC;
+  border-radius: 4px;
+  padding: 7px 11px;
+  margin-top: 1.1em;
+  margin-bottom: 0.6em;
+}
+
+
+/* ===== PARRAFOS E INTERPRETACIONES ===== */
+p {
+  text-align: justify;
+  margin-bottom: 1em;
+}
+
+/* Evita que las lineas queden demasiado largas */
+main.content {
+  max-width: 1200px;
+}
+
+/* ===== ENLACES ===== */
+a {
+  color: #2F5597;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #17365D;
+  text-decoration: underline;
+}
+
+/* ===== TABLAS ===== */
+table {
+  margin: 22px auto;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table thead th {
+  background-color: #17365D !important;
+  color: #FFFFFF !important;
+  border: 1px solid #D5DDE7 !important;
+  padding: 10px 12px !important;
+  text-align: center;
+}
+
+table tbody td {
+  padding: 8px 12px !important;
+  border: 1px solid #D5DDE7 !important;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #F1F5F9;
+}
+
+/* ===== BIBLIOGRAFIA ===== */
+#refs,
+.references,
+div.csl-bib-body {
+  color: #303846;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+#refs a,
+.references a,
+div.csl-bib-body a {
+  color: #2F5597;
+}
+
+/* ===== RECUADROS INFORMATIVOS ===== */
+.callout {
+  border-radius: 7px;
+  margin: 18px 0;
+}
+
+/* ===== GRAFICAS ===== */
+.cell-output-display {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.cell-output-display img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ===== CODIGO R ===== */
+pre {
+  border: 1px solid #D8E2EF;
+  border-radius: 7px;
+}
+
+code {
+  font-size: 0.9em;
+}
+
+/* ===== PANTALLAS PEQUEÑAS ===== */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  table tbody td,
+  table thead th {
+    padding: 6px !important;
+  }
+}
+
+/* ===== CAJITAS PARA SUBTITULOS ===== */
+.subtitulo-caja {
+  display: block;
+  background-color: #EAF0F7;
+  color: #17365D;
+  border-left: 5px solid #2F5597;
+  border-radius: 5px;
+  padding: 11px 15px;
+  margin-top: 22px;
+  margin-bottom: 12px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .subtitulo-caja {
+    padding: 9px 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Subtítulo de la sección */
+.subtitulo-caja {
+  background-color: #EAF0F7;
+  color: #17365D;
+  border-left: 6px solid #8FAADC;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+/* Tablas de contingencia */
+.table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: #303846;
+}
+
+.table thead th {
+  background-color: #17365D !important;
+  color: white !important;
+  text-align: center;
+  vertical-align: middle;
+  border-color: #17365D !important;
+}
+
+.table tbody td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: #F1F5F9;
+}
+
+/* Leyendas de las tablas */
+caption {
+  caption-side: top;
+  color: #17365D;
+  font-weight: 700;
+  text-align: center;
+  padding: 12px;
+}
+
 </style>
 ```
 
@@ -96,6 +475,70 @@ ipak <- function(pkg){
 packages <- c("tidyverse","kableExtra","psych","readxl")
 
 ipak(packages)
+
+# Paleta institucional
+azul_oscuro <- "#17365D"
+azul_medio  <- "#2F5597"
+azul_suave  <- "#8FAADC"
+gris_azulado <- "#5B6777"
+
+# Colores para variables con varias categorias
+paleta_categorias <- c(
+  "#17365D",
+  "#2F5597",
+  "#8FAADC",
+  "#B8C7DC",
+  "#5B6777"
+)
+
+# Tema general de las graficas
+ggplot2::theme_set(
+  ggplot2::theme_minimal(base_size = 12) +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(
+        color = "#17365D",
+        face = "bold",
+        size = 14,
+        hjust = 0.5,
+        margin = ggplot2::margin(b = 12)
+      ),
+      plot.subtitle = ggplot2::element_text(
+        color = "#5B6777",
+        size = 11,
+        hjust = 0.5
+      ),
+      axis.title = ggplot2::element_text(
+        color = "#303846",
+        face = "bold",
+        size = 11
+      ),
+      axis.text = ggplot2::element_text(
+        color = "#465365",
+        size = 10
+      ),
+      panel.grid.major = ggplot2::element_line(
+        color = "#E2E8F0",
+        linewidth = 0.4
+      ),
+      panel.grid.minor = ggplot2::element_blank(),
+      legend.title = ggplot2::element_text(
+        color = "#17365D",
+        face = "bold"
+      ),
+      legend.text = ggplot2::element_text(
+        color = "#303846"
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "white",
+        color = NA
+      ),
+      panel.background = ggplot2::element_rect(
+        fill = "white",
+        color = NA
+      )
+    )
+)
+
 ```
 
 [@readxl; @tidyverse; @kableExtra; @psych]
@@ -165,7 +608,9 @@ glimpse(educación)
 La variable nominal tiene solo frecuencia absoluta, relativa y porcentaje
 :::
 
+::: subtitulo-caja
 **Análisis de frecuencias del género de los encuestados**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -228,7 +673,9 @@ ggplot(genero_counts, aes(x = Genero, y = porcentaje, fill = Genero)) +
   labs(title = "Distribución porcentual del genero de los encuestados", 
        x = "Genero", 
        y = "Porcentaje") +
-  theme_minimal() +
+  theme_minimal()+
+  scale_fill_manual(
+  values = paleta_categorias) +
   theme(legend.position = "none") +
   geom_text(aes(label = sprintf("%.1f%%", porcentaje)), 
             vjust = -0.5, 
@@ -278,7 +725,9 @@ La distribución de los 300 encuestados muestra que el 53,67 % corresponde al g�
 La variable ordinal tiene los cuatro tipos de frecuencias
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de los encuestados según el nivel educativo**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -352,6 +801,8 @@ ggplot(escolaridad_counts, aes(x = Nivel_Educativo, y = porcentaje, fill = Nivel
        x = "Nivel Educativo", 
        y = "Porcentaje") +
   theme_minimal() +
+  scale_fill_manual(
+  values = paleta_categorias) +
   theme(legend.position = "none") +
   geom_text(aes(label = sprintf("%.1f%%", porcentaje)), 
             vjust = -0.5, 
@@ -364,7 +815,9 @@ ggplot(escolaridad_counts, aes(x = Nivel_Educativo, y = porcentaje, fill = Nivel
 En el estudio sobre educación matemática en diferentes campos, el 35 % de los 300 participantes tiene educación secundaria, el 34 % universitaria y el 31 % primaria. La frecuencia acumulada muestra que el 66 % se concentra entre los niveles de primaria y secundaria, mientras que el 100 % se alcanza al incluir el nivel universitario. Estos resultados permiten caracterizar el nivel educativo de los encuestados y contextualizar el análisis de la investigación.
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de los encuestados según el Estrato**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -440,6 +893,8 @@ ggplot(estrato_counts, aes(x = Estrato, y = porcentaje, fill = Estrato)) +
        x = "Estrato", 
        y = "Porcentaje") +
   theme_minimal() +
+  scale_fill_manual(
+  values = paleta_categorias) +
   theme(legend.position = "none") +
   geom_text(aes(label = sprintf("%.1f%%", porcentaje)), 
             vjust = -0.5, 
@@ -527,6 +982,8 @@ ggplot(Tecnologia_counts, aes(x = Tecnologia , y = porcentaje, fill = Tecnologia
        x = "Tecnologia ", 
        y = "Porcentaje") +
   theme_minimal() +
+  scale_fill_manual(
+  values = paleta_categorias) +
   theme(legend.position = "none") +
   geom_text(aes(label = sprintf("%.1f%%", porcentaje)), 
             vjust = -0.5, 
@@ -539,7 +996,9 @@ ggplot(Tecnologia_counts, aes(x = Tecnologia , y = porcentaje, fill = Tecnologia
 La distribución muestra que el 37,33 % de los encuestados presenta un nivel bajo de acceso a la tecnología, el 36 % un nivel medio y el 26,67 % un nivel alto. La frecuencia acumulada indica que el 73,33 % se encuentra entre los niveles bajo y medio, mientras que el 100 % corresponde al total de los participantes. Se evidencia una mayor concentración en los niveles bajo y medio, con una diferencia de 10,66 puntos porcentuales respecto al nivel alto.
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de los encuestados según el Nivel de Satisfaccion**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -613,6 +1072,8 @@ ggplot(Satisfaccion_counts, aes(x = Satisfaccion , y = porcentaje, fill = Satisf
        x = "Satisfaccion", 
        y = "Porcentaje") +
   theme_minimal() +
+  scale_fill_manual(
+  values = paleta_categorias) +
   theme(legend.position = "none") +
   geom_text(aes(label = sprintf("%.1f%%", porcentaje)), 
             vjust = -0.5, 
@@ -631,7 +1092,9 @@ La distribución del nivel de satisfacción muestra que el 22,33 % de los encues
 La variable discreta tiene los cuatro tipos de frecuencias
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de los encuestados según el número de Cursos**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -751,7 +1214,9 @@ La variable continua se tabula con intervalos
 La amplitud debe tener tanto decimales como lo tienen los datos originales. Si tiene un decimal la fórmula se multiplica y se divide por 10. Si tiene dos decimales la fórmula se multiplica y se divide por 100 y así sucesivamente
 :::
 
+::: subtitulo-caja
 **Generación de intervalos de las Horas**
+:::
 
 ::: panel-tabset
 ## Mínimo
@@ -822,7 +1287,9 @@ Xmax
 La diferencia se debe dividir en dos números lo más equitativos de tal manera que estos números tengan tantos decimales como los datos originales. Al mínimo se le resta uno de los números y al máximo se le suma el otro
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de las horas de los usuarios encuestados**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -908,8 +1375,12 @@ ojiva_data <- educación %>%
 
 # Graficar la ojiva
 ggplot(ojiva_data, aes(x = ls, y = Hi)) +
-  geom_line(color = "blue", size = 1) +
-  geom_point(color = "red", size = 2) +
+geom_line(
+  color = "#17365D",
+  linewidth = 1.1) +
+geom_point(
+  color = "#DC143C",
+  size = 2.5) +
   labs(
     title = "Ojiva de Frecuencia acumulada: Horas de estudio",
     x = "Horas",
@@ -953,12 +1424,11 @@ if (nrow(datos_densidad) < 2 ||
 # Crear la curva de densidad
 ggplot(datos_densidad, aes(x = valor)) +
   geom_density(
-    fill = "steelblue",
-    alpha = 0.4,
-    linewidth = 1,
-    color = "darkblue",
-    na.rm = TRUE
-  ) +
+  color = "#17365D",
+  fill = "#8FAADC",
+  alpha = 0.35,
+  linewidth = 1.1
+)
   labs(
     title = paste("Distribución de densidad:", variable),
     x = variable,
@@ -979,7 +1449,9 @@ ggplot(datos_densidad, aes(x = valor)) +
 La distribución de frecuencias de la variable horas evidencia una mayor concentración de observaciones en el intervalo de 18,6 a 21,6 horas, con 40 participantes (13,33 %), seguido del intervalo de 24,6 a 27,6 horas, con 39 participantes (13 %). Por el contrario, el intervalo de 0,61 a 3,61 horas registra la menor frecuencia, con 18 participantes (6 %). Asimismo, la frecuencia relativa acumulada indica que el 67,33 % de los participantes registra hasta 21,6 horas. En conjunto, los datos muestran una distribución variable entre los intervalos, con una mayor presencia de observaciones en los rangos intermedios y altos.
 :::
 
+::: subtitulo-caja
 **Generación de intervalos de los Promedios**
+:::
 
 ::: panel-tabset
 ## Mínimo
@@ -1046,7 +1518,9 @@ Xmax
 ```
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de los promedios de los usuarios encuestados**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -1131,8 +1605,12 @@ ojiva_data <- educación %>%
 
 # Graficar la ojiva
 ggplot(ojiva_data, aes(x = ls, y = Hi)) +
-  geom_line(color = "blue", size = 1) +
-  geom_point(color = "red", size = 2) +
+geom_line(
+  color = "#17365D",
+  linewidth = 1.1) +
+geom_point(
+  color = "#DC143C",
+  size = 2.5) +
   labs(
     title = "Ojiva de Frecuencia acumulada: Promedio",
     x = "Promedio",
@@ -1174,13 +1652,12 @@ if (nrow(datos_densidad) < 2 ||
 
 # Crear la curva de densidad
 ggplot(datos_densidad, aes(x = valor)) +
-  geom_density(
-    fill = "steelblue",
-    alpha = 0.4,
-    linewidth = 1,
-    color = "darkblue",
-    na.rm = TRUE
-  ) +
+   geom_density(
+  color = "#17365D",
+  fill = "#8FAADC",
+  alpha = 0.35,
+  linewidth = 1.1
+)
   labs(
     title = paste("Distribución de densidad:", variable),
     x = variable,
@@ -1200,7 +1677,9 @@ ggplot(datos_densidad, aes(x = valor)) +
 La distribución de frecuencias del promedio muestra que los intervalos con mayor número de participantes son de 3,23 a 3,67, con 40 personas (13,33 %), y de 2,79 a 3,23, con 39 personas (13 %). En contraste, el intervalo de 1,91 a 2,35 presenta la menor frecuencia, con 25 participantes (8,33 %). La frecuencia relativa acumulada indica que el 67,33 % de los datos se encuentra en valores de promedio de hasta 3,67, mientras que el 100 % se alcanza al incluir el último intervalo, hasta 4,99. En general, se observa una mayor concentración de participantes en los intervalos centrales de la distribución.
 :::
 
+::: subtitulo-caja
 **Generación de intervalos de las Asistencia**
+:::
 
 ::: panel-tabset
 ## Mínimo
@@ -1267,7 +1746,9 @@ Xmax
 ```
 :::
 
+::: subtitulo-caja
 **Distribución de frecuencias de las asistencias(%) de los usuarios encuestados**
+:::
 
 ::: panel-tabset
 ## Tabla
@@ -1352,8 +1833,12 @@ ojiva_data <- educación %>%
 
 # Graficar la ojiva
 ggplot(ojiva_data, aes(x = ls, y = Hi)) +
-  geom_line(color = "blue", size = 1) +
-  geom_point(color = "red", size = 2) +
+geom_line(
+  color = "#17365D",
+  linewidth = 1.1) +
+geom_point(
+  color = "#DC143C",
+  size = 2.5) +
   labs(
     title = "Ojiva de Frecuencia acumulada: Asistencia",
     x = "Asistencia",
@@ -1395,13 +1880,12 @@ if (nrow(datos_densidad) < 2 ||
 
 # Crear la curva de densidad
 ggplot(datos_densidad, aes(x = valor)) +
-  geom_density(
-    fill = "steelblue",
-    alpha = 0.4,
-    linewidth = 1,
-    color = "darkblue",
-    na.rm = TRUE
-  ) +
+ geom_density(
+  color = "#17365D",
+  fill = "#8FAADC",
+  alpha = 0.35,
+  linewidth = 1.1
+)
   labs(
     title = paste("Distribución de densidad:", variable),
     x = variable,
@@ -1419,4 +1903,372 @@ ggplot(datos_densidad, aes(x = valor)) +
 ## Intrepretación
 
 La distribución del porcentaje de asistencia muestra que la mayor frecuencia se presenta en el intervalo de 88,7 % a 94,2 %, con 42 participantes (14 %), seguido del intervalo de 50,2 % a 55,7 %, con 41 participantes (13,67 %). Por el contrario, el intervalo de 77,7 % a 83,2 % registra la menor frecuencia, con 18 participantes (6 %). Según la frecuencia relativa acumulada, el 73 % de los encuestados presenta porcentajes de asistencia de hasta el 88,7 %, mientras que el 100 % se alcanza al incluir el intervalo final. Estos resultados reflejan una distribución heterogénea de los porcentajes de asistencia, con una concentración importante en los intervalos superiores.
+:::
+
+## . Tablas de contingencia
+
+::: subtitulo-caja
+**Análisis de la relación entre el nivel educativo y la satisfacción de los encuestados**
+:::
+```{r}
+
+# Paleta de colores del documento
+colores_satisfaccion <- c(
+  "Muy baja" = "#17365D",
+  "Baja"     = "#2F5597",
+  "Media"    = "#8FAADC",
+  "Alta"     = "#B8C7DC",
+  "Muy alta" = "#DCE6F1"
+)
+
+# Tema general para los gráficos
+tema_documento <- theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(
+      color = "#17365D",
+      face = "bold",
+      size = 14,
+      hjust = 0.5
+    ),
+    axis.title = element_text(
+      color = "#303846",
+      face = "bold",
+      size = 11
+    ),
+    axis.text = element_text(
+      color = "#465365",
+      size = 10
+    ),
+    legend.title = element_text(
+      color = "#17365D",
+      face = "bold"
+    ),
+    legend.text = element_text(color = "#303846"),
+    panel.grid.major = element_line(
+      color = "#E2E8F0",
+      linewidth = 0.4
+    ),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(12, 18, 12, 12)
+  )
+
+```
+
+::: panel-tabset
+## Absolutas
+
+```{r}
+# Cargar las bibliotecas necesarias
+library(dplyr)
+library(readxl)
+library(kableExtra)
+
+
+
+# Crear una tabla de contingencia con DEPORTE y DESEMPEÑO
+table_educación_Sati <- table(educación$Nivel_Educativo
+, educación$Satisfaccion)
+
+# Convertir la tabla a un data frame para facilitar el manejo de datos
+table_ds <- as.data.frame.matrix(table_educación_Sati)
+
+# Calcular los totales de frecuencia absoluta (Total)
+table_ds$Total <- rowSums(table_ds)  # Totales por fila
+total_fi <- sum(table_ds$Total)      # Total general
+
+# Añadir una fila de totales al final de la tabla
+table_ds <- rbind(table_ds, Total = c(colSums(table_educación_Sati), total_fi))
+
+# Mostrar la tabla con kableExtra, aplicando color solo a la fila de Totales
+
+table_ds %>%
+  kable(
+    format = "html",
+    caption = "Frecuencias absolutas según nivel educativo y satisfacción",
+    align = "c"
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position = "center",
+    font_size = 14
+  ) %>%
+  row_spec(
+    nrow(table_ds),
+    bold = TRUE,
+    color = "white",
+    background = "#17365D"
+  )
+
+```
+
+## Relativas
+
+```{r}
+# Cargar las bibliotecas necesarias
+library(dplyr)
+library(readxl)
+library(kableExtra)
+
+
+# Crear una tabla de contingencia con DEPORTE y DESEMPEÑO
+table_educación_Sati <- table(educación$Nivel_Educativo, educación$Satisfaccion
+)
+
+# Convertir la tabla a un data frame para facilitar el manejo de datos
+table_ds <- as.data.frame.matrix(table_educación_Sati)
+
+# Calcular el total general para las frecuencias relativas
+total_fi <- sum(table_ds)  # Total general para todas las celdas
+
+# Calcular las frecuencias relativas
+table_ds <- table_ds / total_fi  # Dividir cada valor por el total general para obtener la frecuencia relativa
+
+# Calcular los totales de frecuencia relativa por fila y columna
+table_ds$Total <- rowSums(table_ds)  # Totales por fila (frecuencias relativas)
+total_column <- colSums(table_ds)  # Totales por columna (frecuencias relativas)
+
+# Añadir una fila de totales al final de la tabla
+table_ds <- rbind(table_ds, Total = total_column)
+
+# Mostrar la tabla con kableExtra, aplicando color solo a la fila de Totales
+
+table_ds %>%
+  kable(
+    format = "html",
+    digits = 4,
+    caption = "Frecuencias relativas según nivel educativo y satisfacción",
+    align = "c"
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position = "center",
+    font_size = 14
+  ) %>%
+  row_spec(
+    nrow(table_ds),
+    bold = TRUE,
+    color = "white",
+    background = "#17365D"
+  )
+
+```
+
+## Conjuntas
+
+```{r}
+# Cargar las librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(readxl)
+library(kableExtra)
+
+
+# Calcular los porcentajes por nivel educativo
+data_porcentaje <- educación %>%
+  count(Nivel_Educativo, Satisfaccion) %>%
+  group_by(Nivel_Educativo) %>%
+  mutate(porcentaje = n / sum(n) * 100) %>%
+  ungroup()
+
+
+ggplot(
+  data_porcentaje,
+  aes(x = Nivel_Educativo, y = porcentaje, fill = Satisfaccion)
+) +
+  geom_col(
+    position = position_dodge(width = 0.85),
+    width = 0.75
+  ) +
+  geom_text(
+    aes(label = sprintf("%.1f%%", porcentaje)),
+    position = position_dodge(width = 0.8),
+    vjust = -0.3,
+    size = 3,
+    color = "#303846"
+  ) +
+  scale_fill_manual(values = colores_satisfaccion) +
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.22))
+  ) +
+  labs(
+    title = "Satisfacción según nivel educativo",
+    subtitle = "Porcentaje dentro de cada nivel educativo",
+    x = "Nivel educativo",
+    y = "Porcentaje",
+    fill = "Nivel de satisfacción"
+  ) +
+  tema_documento +
+  theme(
+    axis.text.x = element_text(size = 10),
+    legend.position = "bottom",
+    legend.box = "vertical",
+    plot.title = element_text(size = 14),
+    plot.margin = margin(15, 20, 15, 15)
+  )
+
+```
+
+## Apiladas 1
+
+```{r}
+# Cargar las librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(readxl)
+
+
+# Calcular los porcentajes de cada categoría de DESEMPEÑO dentro de cada NIVEL DE ESCOLARIDAD
+data_porcentaje <- educación %>%
+  count(Nivel_Educativo, Satisfaccion) %>%
+  group_by(Nivel_Educativo) %>%
+  mutate(porcentaje = n / sum(n) * 100)
+
+# Crear el diagrama de barras apiladas con porcentajes
+
+
+ggplot(
+  data_porcentaje,
+  aes(x = Nivel_Educativo, y = porcentaje, fill = Satisfaccion)
+) +
+  geom_col(width = 0.70, position = "stack") +
+  
+
+geom_text(
+  aes(
+    label = ifelse(
+      porcentaje >= 7,
+      sprintf("%.1f%%", porcentaje),
+      ""
+    ),
+    color = Satisfaccion %in% c("Muy baja", "Baja")
+  ),
+  position = position_stack(vjust = 0.5),
+  size = 3.2,
+  fontface = "bold"
+) +
+scale_color_manual(
+  values = c(
+    "TRUE" = "#17365D",
+    "FALSE" = "#FFFFFF"
+  ),
+  guide = "none"
+) +
+  scale_fill_manual(values = colores_satisfaccion) +
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    breaks = seq(0, 100, by = 20),
+    limits = c(0, 100),
+    expand = expansion(mult = c(0, 0.02))
+  ) +
+  labs(
+    title = "Distribución de la satisfacción según nivel educativo",
+    subtitle = "Porcentaje dentro de cada nivel educativo",
+    x = "Nivel educativo",
+    y = "Porcentaje",
+    fill = "Nivel de satisfacción"
+  ) +
+  tema_documento +
+  theme(
+    axis.text.x = element_text(size = 11),
+    axis.text.y = element_text(size = 10),
+    legend.position = "bottom",
+    legend.box = "vertical",
+    legend.text = element_text(size = 9),
+    plot.title = element_text(size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 10, hjust = 0.5),
+    plot.margin = margin(15, 20, 15, 15)
+  )
+
+
+
+```
+
+## Apiladas 2
+
+```{r}
+# Cargar las librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(readxl)
+
+
+# Calcular los porcentajes de cada categoría de DESEMPEÑO dentro de cada NIVEL DE ESCOLARIDAD
+data_porcentaje <- educación %>%
+  count(Nivel_Educativo, Satisfaccion) %>%
+  group_by(Nivel_Educativo) %>%
+  mutate(porcentaje = n / sum(n) * 100)
+
+# Crear el diagrama de barras apiladas en forma horizontal con porcentajes
+
+ggplot(
+  data_porcentaje,
+  aes(
+    x = porcentaje,
+    y = Nivel_Educativo,
+    fill = Satisfaccion
+  )
+) +
+  geom_col(width = 0.65) +
+  geom_text(
+    aes(
+      label = ifelse(
+        porcentaje >= 7,
+        sprintf("%.1f%%", porcentaje),
+        ""
+      ),
+      color = Satisfaccion
+    ),
+    position = position_stack(vjust = 0.5),
+    size = 3.2,
+    fontface = "bold",
+    hjust = 0.5,
+    vjust = 0.5
+  ) +
+  scale_fill_manual(
+    values = colores_satisfaccion
+  ) +
+  scale_color_manual(
+    values = c(
+      "Muy baja" = "#FFFFFF",
+      "Baja" = "#FFFFFF",
+      "Media" = "#17365D",
+      "Alta" = "#17365D",
+      "Muy alta" = "#17365D"
+    ),
+    guide = "none"
+  ) +
+  scale_x_continuous(
+    labels = function(x) paste0(x, "%"),
+    breaks = seq(0, 100, by = 20),
+    limits = c(0, 100),
+    expand = expansion(mult = c(0, 0.02))
+  ) +
+  labs(
+    title = "Satisfacción por nivel educativo",
+    subtitle = "Distribución porcentual dentro de cada nivel educativo",
+    x = "Porcentaje",
+    y = "Nivel educativo",
+    fill = "Nivel de satisfacción"
+  ) +
+  tema_documento +
+  theme(
+    axis.text.x = element_text(size = 10),
+    axis.text.y = element_text(size = 11),
+    legend.position = "bottom",
+    legend.box = "vertical",
+    legend.text = element_text(size = 9),
+    plot.title = element_text(size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 10, hjust = 0.5),
+    plot.margin = margin(15, 20, 15, 15)
+  )
+
+```
+
+## Interpretación
+
+La satisfacción global hacia la educación matemática en la muestra ($N = 300$) tiende a ser positiva: el 44% de los encuestados reporta una satisfacción Alta o Muy alta ($132$ casos), superando al 37.67% que se ubica en los niveles Bajo o Muy bajo ($113$ casos).   Comportamiento por Nivel Educativo:Primaria ($n = 93$): Predomina una valoración moderada-alta, liderada por la categoría Alta (24.73%).   Secundaria ($n = 105$): Refleja polarización, concentrando la mayor insatisfacción en la categoría Baja (24.76%), pero alcanzando a su vez un alto nivel de Muy alta (23.81%).   Universidad ($n = 102$): Consolida la percepción más favorable, registrando su pico en Muy alta (25.49%).   Conclusión: Aunque la secundaria representa el punto de mayor insatisfacción y la universidad la mayor satisfacción, la prueba inferencial ($\chi^2 = 4.93$, $p = 0.765$) indica que no existe una dependencia estadísticamente significativa entre el nivel educativo y la satisfacción, mostrando un patrón homogéneo en la muestra.
+
 :::
