@@ -1,6 +1,6 @@
 ---
 title: "DISTRIBUCIONES DE FRECUENCIAS"
-subtitle: "CONCEPTOS"
+subtitle: "Tablas y Graficas"
 author: 
   - name: Juan Manuel Rangel Rodríguez
     affiliation: "Universidad del Tolima"
@@ -100,7 +100,7 @@ ipak(packages)
 
 [@readxl; @tidyverse; @kableExtra; @psych]
 
-# . Leer el Dataset
+# . Leer El Dataset
 
 ```{r}
 educación <- read_excel("Datos/educacion.xlsx")
